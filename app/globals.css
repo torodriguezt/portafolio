@@ -2,8 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(126, 231, 135, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(126, 231, 135, 0.5); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
 :root {
   --color-primary-500: 59, 130, 246; /* blue-500 */
+  --accent: 160, 255, 200; /* mint green accent */
 }
 
 html {
@@ -11,7 +55,141 @@ html {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  overflow-x: hidden;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #7ee787 0%, #58a6ff 50%, #a371f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+.glass-hover:hover {
+  background: rgba(22, 27, 34, 0.85);
+  border-color: rgba(126, 231, 135, 0.3);
+}
+
+/* Card glow effect */
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(126, 231, 135, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.card-glow:hover::before {
+  left: 100%;
+}
+
+/* Subtle background pattern */
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(126, 231, 135, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(88, 166, 255, 0.03) 0%, transparent 50%);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(48, 54, 61, 0.8), transparent);
+}
+
+/* Glow border */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(126, 231, 135, 0.4), rgba(88, 166, 255, 0.4));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #161b22;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* ASCII art styling */
+.ascii-art {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.5rem;
+  line-height: 0.6rem;
+  color: #58a6ff;
+  white-space: pre;
+  letter-spacing: 0;
+}
+
+@media (min-width: 768px) {
+  .ascii-art {
+    font-size: 0.55rem;
+    line-height: 0.65rem;
+  }
+}
+
+/* Highlight text */
+.text-accent {
+  color: #7ee787;
+}
+
+/* Link highlight on hover */
+.link-highlight {
+  color: #7ee787;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.link-highlight:hover {
+  opacity: 0.8;
 }
 
 @layer utilities {

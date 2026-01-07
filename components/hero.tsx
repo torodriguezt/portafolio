@@ -1,220 +1,291 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowDown, Github, Linkedin, Twitter } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
+import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
+import { Mail } from "lucide-react"
 
-export default function Hero() {
-  const { t } = useLanguage()
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  })
+function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
+  const [displayedText, setDisplayedText] = useState("")
+  const [isTyping, setIsTyping] = useState(false)
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  useEffect(() => {
+    const startTimeout = setTimeout(() => {
+      setIsTyping(true)
+      let index = 0
+      const interval = setInterval(() => {
+        if (index < text.length) {
+          setDisplayedText(text.slice(0, index + 1))
+          index++
+        } else {
+          clearInterval(interval)
+          setIsTyping(false)
+        }
+      }, 80)
+
+      return () => clearInterval(interval)
+    }, delay)
+
+    return () => clearTimeout(startTimeout)
+  }, [text, delay])
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex flex-col justify-center items-center px-4 pt-16 pb-8 overflow-hidden"
-    >
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/50 to-white dark:from-blue-950/20 dark:to-gray-950" />
+    <span>
+      {displayedText}
+      <span 
+        className={`inline-block w-[3px] h-[1em] bg-[#7ee787] ml-1 align-middle ${
+          isTyping ? 'animate-pulse' : 'animate-blink'
+        }`}
+      />
+    </span>
+  )
+}
 
-      {/* Animated background shapes */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2 }}
-        className="absolute inset-0 -z-5 overflow-hidden"
-      >
-        <motion.div
-          animate={{
-            rotate: 360,
-            transition: { duration: 100, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-          }}
-          className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-blue-300 to-purple-300 dark:from-blue-600 dark:to-purple-600 blur-3xl opacity-30"
-        />
-        <motion.div
-          animate={{
-            rotate: -360,
-            transition: { duration: 120, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-          }}
-          className="absolute -bottom-[40%] -right-[10%] w-[80%] h-[80%] rounded-full bg-gradient-to-r from-blue-300 to-teal-300 dark:from-blue-600 dark:to-teal-600 blur-3xl opacity-30"
-        />
-      </motion.div>
+interface Particle {
+  x: number
+  y: number
+  originX: number
+  originY: number
+  char: string
+  vx: number
+  vy: number
+}
 
-      <motion.div style={{ y, opacity }} className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-        {/* Text Content */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-center md:text-left order-2 md:order-1"
-        >
-          <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="inline-block px-4 py-1.5 mb-6 text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full"
+function InteractiveAscii() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<Particle[]>([])
+  const mouseRef = useRef({ x: -1000, y: -1000 })
+  const animationRef = useRef<number>()
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    // Dragon ASCII art
+    const asciiPattern = [
+      "                    +T+++++++T+++                      ",
+      "                    +++|+++++++|+++|                   ",
+      "                    ++++++++++++++/+                   ",
+      "                    ++++++++++++++/++                  ",
+      "                    +++++++++++++/++++                 ",
+      "                    +++++:::iiiII/++++.                ",
+      "                    IIIIIIIIIIII/Ii++++                ",
+      "                    ITTTTTTTTTT/III++++.               ",
+      "                    \"IIIIIIIIIIiIIII++++               ",
+      "                      \"IIIIIIIIIiIIII+++.              ",
+      "                        \"IIIIIIIIiIIIi+++              ",
+      "                          \"IIIIIIIiIII+++              ",
+      "                            \"I/\\IIIiIII++              ",
+      "                             ///\\IIIiIIi+              ",
+      "              .o8OOOOOOOOOOOOOo/IIIIIiIIi              ",
+      "            oOOOOOOOOOOOOOOOOOOOOIIIIIiI               ",
+      "           888888888888OOOOOOOOOOOOIIIII               ",
+      "      o8OOOOOOOOOOOOOOO88888OOOOOOOOIIIT               ",
+      "    oOOOOOOOOOOOOOOOOOOOOOOO888OOOOOb                  ",
+      "   8OOOOOOOOOOOOOOOOOOOOOOOOOOO8OOOOOb                 ",
+      "   OOOOOOOOOOOOOOOOOOOOOOOOOOOOO88OOOOb                ",
+      "   OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO8OOOO.               ",
+      "   OOOO~~~~~~~~~~~~~~~~OOOOOOOOOOOO8OOOb               ",
+      "   OO~ oo8888888888888oo ~~OOOOOOOOO8OOO               ",
+      "   8 oO888888888888888888oo ~~OOOOOOO8OO               ",
+      "   8 OO888888888888888888888oo OOOOOO8OO               ",
+      "   ~8 O8888888888888888888888888 ~OOOOOP               ",
+      "     ~O88 ~888~Y88Y88P    888888>-~OOOO                ",
+      "       88b ~~ .888 ~~    d88888| ( OOOO                ",
+      "        88Xooo88888ooood8888888/ /XooO~                ",
+      "         ~88888888888888888888| |OOX|                  ",
+      "         //88888888888888888:',:OOO|                   ",
+      "       ,'/OOOO888888888888~<-<OOOOO|                   ",
+      "      <-<OOOOO| jFFFFFFFFF* \\ \\OOOO|                  ",
+      "       \\ \\OOO/  H********** | |OOO/                   ",
+      "        \\_\\O/   H*******\\*** \\ \\O/                    ",
+      "                H\\*******|**  \\_V                      ",
+      "                H*\\******|**                           ",
+      "           __   H\\*\\*****|**                           ",
+      "         _(  `-vH*\\******|**     __                    ",
+      "       _l  `-  \\\\**\\*****|**  _/'  \\                  ",
+      "      (  ~-_    \\\\*******|**-T    \\ |                 ",
+      "       \\ \\_ _    \\)******(__/     | |>                ",
+      "       |   Y ..  ,O\\******    _ / | |<_                ",
+      "     ___~-'8o8OO88OX8OOOO    ~ Y  '/O8|                ",
+      "   ,'   `-_OOOOOOOXX|OOOO8o.  .A  /OX/>                ",
+      "  /...     \\X8OOOXX/|OOOOO|OOOOO8X\\X/ <_               ",
+      " 888888b    \\XXX8X/:|OOOOO|\\8XXXXX      \\              ",
+      "d88888888    |\\X8/::|8XXXX|\\IXX~  \\ d8.  \\             ",
+      "888888888b   \\ \\/ ::lXXXXXl ~~ \\--_|888   \\            ",
+      "Y88DR88888    |  .:\"-----\"    /_-_|~8~   |             ",
+      " 888888888b   \\  :::          /_ -_|      |            ",
+      " 8888GUZ888    | ::          /_ -_ |      |            ",
+      "  888888888b   \\:::         /_ -_ /       [            ",
+      "   888888888    |`:        /  -_ /       ]             ",
+      "    88888888b     |       |     /        |             ",
+      "     88888888b    [       |    (        /              ",
+      "      88888888   ]        |            /               ",
+      "       ~888888b  |         \\         ,'                ",
+      "         ~88888  |          `.___,--'                  ",
+      "           ~~88_/                                      ",
+    ]
+
+    const charSize = 9
+    const spacing = 5
+
+    // Calculate dimensions
+    const maxWidth = Math.max(...asciiPattern.map(row => row.length))
+    canvas.width = maxWidth * spacing
+    canvas.height = asciiPattern.length * spacing * 1.4
+
+    // Create particles from ASCII pattern
+    const particles: Particle[] = []
+    asciiPattern.forEach((row, y) => {
+      for (let x = 0; x < row.length; x++) {
+        const char = row[x]
+        if (char !== " ") {
+          particles.push({
+            x: x * spacing,
+            y: y * spacing * 1.4,
+            originX: x * spacing,
+            originY: y * spacing * 1.4,
+            char: char,
+            vx: 0,
+            vy: 0,
+          })
+        }
+      }
+    })
+    particlesRef.current = particles
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.font = `${charSize}px "JetBrains Mono", "Courier New", monospace`
+
+      const mouse = mouseRef.current
+      const maxDistance = 60
+      const pushStrength = 8
+      const friction = 0.94
+      const returnStrength = 0.025
+
+      particles.forEach((particle) => {
+        const dx = mouse.x - particle.x
+        const dy = mouse.y - particle.y
+        const distance = Math.sqrt(dx * dx + dy * dy)
+
+        // Apply push force if mouse is close
+        if (distance < maxDistance && distance > 0) {
+          const force = (maxDistance - distance) / maxDistance
+          const angle = Math.atan2(dy, dx)
+          particle.vx -= Math.cos(angle) * force * pushStrength * 0.15
+          particle.vy -= Math.sin(angle) * force * pushStrength * 0.15
+        }
+
+        // Apply friction
+        particle.vx *= friction
+        particle.vy *= friction
+
+        // Return to origin with spring effect
+        const returnDx = particle.originX - particle.x
+        const returnDy = particle.originY - particle.y
+        particle.vx += returnDx * returnStrength
+        particle.vy += returnDy * returnStrength
+
+        // Update position
+        particle.x += particle.vx
+        particle.y += particle.vy
+
+        // Green color palette for Dragon
+        ctx.fillStyle = "#7ee787"
+
+        ctx.fillText(particle.char, particle.x, particle.y + charSize)
+      })
+
+      animationRef.current = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    mouseRef.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    }
+  }
+
+  const handleMouseLeave = () => {
+    mouseRef.current = { x: -1000, y: -1000 }
+  }
+
+  return (
+    <canvas
+      ref={canvasRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="cursor-default"
+      style={{ maxWidth: "100%", height: "auto" }}
+    />
+  )
+}
+
+export default function Hero() {
+  return (
+    <section className="min-h-screen flex flex-col justify-center px-4 sm:px-8 lg:px-16 pt-20 pb-16 bg-[#0d1117]">
+      <div className="max-w-6xl mx-auto w-full">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Interactive ASCII Art */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="hidden md:flex justify-center lg:justify-start"
           >
-            {t("hero.profession")}
-          </motion.span>
+            <InteractiveAscii />
+          </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
-          >
-            {t("hero.title")} <span className="text-blue-600 dark:text-blue-400">Tomás Rodríguez</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto md:mx-0 mb-10"
-          >
-            {t("hero.subtitle")}
-          </motion.p>
-
+          {/* Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap justify-center md:justify-start gap-4 mb-12"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
           >
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              href="#contact"
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 dark:bg-blue-700 dark:hover:bg-blue-600"
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#e6edf3]">
+              hi, <span className="text-[#7ee787]">tomás</span> here.
+              <TypewriterText text="" delay={500} />
+            </h1>
+
+            <p className="text-[#8b949e] text-base sm:text-lg leading-relaxed max-w-xl">
+              I'm a software engineer focused on data-driven applications.
+              I'm passionate about bridging software architecture and predictive modeling, turning complex data into scalable, strategic solutions.
+              Some of my main interest are computer vision, NLP, Bayesian modelling and cloud computing. 
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              {t("hero.contact")}
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              href="#projects"
-              className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200"
-            >
-              {t("hero.projects")}
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              href="https://drive.google.com/file/d/your-cv-link/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-white hover:bg-gray-100 text-gray-800 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 dark:border-gray-700 flex items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-[#7ee787] text-[#7ee787] rounded-md hover:bg-[#7ee787]/10 transition-colors duration-200"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              {t("hero.downloadCV")}
-            </motion.a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="flex justify-center md:justify-start space-x-5 mb-12"
-          >
-            <motion.a
-              whileHover={{ scale: 1.2, color: "#2563eb" }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              href="https://github.com/torodriguezt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-            >
-              <Github className="h-6 w-6" />
-              <span className="sr-only">GitHub</span>
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.2, color: "#2563eb" }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              href="https://www.linkedin.com/in/tomasrodriguezt/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-            >
-              <Linkedin className="h-6 w-6" />
-              <span className="sr-only">LinkedIn</span>
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Profile Image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.5,
-            type: "spring",
-            stiffness: 100,
-          }}
-          className="order-1 md:order-2 flex justify-center"
-        >
-          <div className="relative">
-            {/* Decorative elements */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500 rounded-full opacity-20 z-0"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-500 rounded-full opacity-20 z-0"
-            />
-
-            {/* Profile image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl"
-            >
-              <img
-                src="/perfil_2.jpg?height=400&width=400"
-                alt="Tomás Rodríguez"
-                className="w-full h-full object-cover"
-              />
+                <Mail className="w-4 h-4" />
+                Say hi!
+              </a>
             </motion.div>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
-      >
-        <a href="#about" className="text-gray-500 dark:text-gray-400">
-          <ArrowDown className="h-6 w-6" />
-          <span className="sr-only">Desplazar hacia abajo</span>
-        </a>
-      </motion.div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
 }

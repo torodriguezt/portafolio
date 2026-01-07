@@ -1,20 +1,19 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import ThemeToggle from "@/components/theme-toggle"
-import LanguageToggle from "@/components/language-toggle"
 import { LanguageProvider } from "@/contexts/language-context"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  title: "Tomás Rodríguez | Científico de Datos",
+  title: "Tomás Rodríguez | Data Scientist",
   description:
-    "Portfolio profesional de Tomás Rodríguez, Científico de Datos especializado en análisis, visualizaciones y machine learning.",
-    generator: 'v0.dev'
+    "Professional portfolio of Tomás Rodríguez, Data Scientist specialized in analysis, visualizations and machine learning.",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -23,22 +22,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark">
       <body
-        className={`${inter.className} bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#0d1117] text-[#e6edf3] min-h-screen`}
       >
         <LanguageProvider>
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <ThemeToggle />
-          <LanguageToggle />
         </LanguageProvider>
       </body>
     </html>
   )
 }
-
-
-
-import './globals.css'
