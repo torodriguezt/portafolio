@@ -22,6 +22,7 @@ export default function Navbar() {
     { href: "#about", label: "About", isPage: false },
     { href: "#experience", label: "Experience", isPage: false },
     { href: "/projects", label: "Projects", isPage: true },
+    { href: "/blog", label: "Blog", isPage: true },
   ]
 
   return (

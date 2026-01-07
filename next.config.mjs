@@ -16,6 +16,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,

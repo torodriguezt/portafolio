@@ -18,7 +18,9 @@ export default function About() {
     "Scikit-learn",
     "Pandas",
     "Next.js",
-    "Docker"
+    "Docker",
+    "Git & GitHub",
+    "AWS"
   ]
 
   return (
@@ -74,8 +76,8 @@ export default function About() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="text-[#8b949e] leading-relaxed"
               >
-              I'm passionate about machine learning and computer vision, and about transforming complex
-              datasets into actionable insights through well-designed software systems.
+              I'm passionate about machine learning, deep learning, computer vision, and about transforming complex
+              data into actionable insights through well-designed software systems.
               I enjoy building tools that help people make better, data-informed decisions.
               </motion.p>
 
@@ -87,7 +89,7 @@ export default function About() {
                 className="pt-4"
               >
                 <p className="text-[#8b949e] leading-relaxed mb-6">
-                  Outside of work, I enjoy to watch movies and practice my photography.
+                  Outside of work, I enjoy to watch movies, read books, and practice my photography.
                 </p>
 
                 <div>
@@ -121,7 +123,7 @@ export default function About() {
             >
               <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-lg overflow-hidden">
                 <img
-                  src="/perfil_2.jpg"
+                  src="/perfil.jpg"
                   alt="Tomás Rodríguez"
                   className="w-full h-full object-cover"
                 />

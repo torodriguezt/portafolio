@@ -7,7 +7,7 @@ export default function Experience() {
       company: "Impossible Code",
       fullName: "Impossible Code",
       title: "Software Engineer",
-      period: "Nov 2025 – Present",
+      period: "November 2025 – Present",
       points: [
         "Designed and implemented database schema updates, creating new relational tables that integrate seamlessly with existing clinical data models.",
         "Implemented concurrency control mechanisms to prevent race conditions and ensure data integrity in multi-user clinical workflows.",
@@ -21,7 +21,7 @@ export default function Experience() {
       company: "Universidad Nacional de Colombia",
       fullName: "Universidad Nacional de Colombia",
       title: "Research Assistant",
-      period: "JAN 2023 - PRESENT",
+      period: "January 2023 - Present",
       points: [
         "Implementation of spatial, temporal, and quantile regression statistical models from a Bayesian perspective",
         "Predicting pollution levels in soil and air using advanced statistical modeling techniques",
