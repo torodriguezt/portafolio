@@ -95,7 +95,7 @@ export default function AboutPage() {
             <div className="lg:col-span-1">
               <div className="aspect-[3/4] overflow-hidden">
                 <img
-                  src="/perfil.jpg"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/perfil.jpg`}
                   alt="Tomás Rodríguez"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 />
