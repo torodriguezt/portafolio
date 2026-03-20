@@ -265,6 +265,10 @@ Transformers are the state of the art in NLP and their use is increasingly acces
   },
 }
 
+export function generateStaticParams() {
+  return Object.keys(blogPostsData).map((slug) => ({ slug }))
+}
+
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = blogPostsData[params.slug]
 
