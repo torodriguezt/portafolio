@@ -10,10 +10,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  title: "Tomás Rodríguez | Data Scientist",
+  title: "Tomás Rodríguez | AI & Data Science",
   description:
-    "Professional portfolio of Tomás Rodríguez, Data Scientist specialized in analysis, visualizations and machine learning.",
-  generator: 'v0.dev'
+    "Portfolio of Tomás Rodríguez — AI researcher and software engineer specializing in deep learning, Bayesian statistics, and data-driven systems.",
 }
 
 export default function RootLayout({
@@ -22,10 +21,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#0d1117] text-[#e6edf3] min-h-screen`}
-      >
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
         <LanguageProvider>
           <Navbar />
           <main>{children}</main>
