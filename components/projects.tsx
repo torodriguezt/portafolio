@@ -255,7 +255,7 @@ export default function Projects() {
             >
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={project.image || "/placeholder.svg"}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${project.image || '/placeholder.svg'}`}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />

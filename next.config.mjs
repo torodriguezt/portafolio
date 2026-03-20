@@ -1,7 +1,12 @@
+const basePath = process.env.NODE_ENV === 'production' ? '/portafolio' : ''
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/portafolio' : '',
+  basePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

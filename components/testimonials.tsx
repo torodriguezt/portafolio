@@ -65,7 +65,7 @@ export default function Testimonials() {
               <p className="text-gray-600 dark:text-gray-300 mb-6 relative z-10">"{testimonial.content}"</p>
               <div className="flex items-center">
                 <img
-                  src={testimonial.image || "/placeholder.svg"}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${testimonial.image || '/placeholder.svg'}`}
                   alt={testimonial.author}
                   className="w-12 h-12 rounded-full object-cover mr-4"
                 />
