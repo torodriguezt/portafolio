@@ -43,18 +43,18 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-normal text-gray-900">
             Tom{"á"}s Rodr{"í"}guez
           </h1>
 
-          <div className="w-12 h-px bg-gray-300 my-8" />
+          <div className="w-12 h-px bg-gray-200 my-10" />
 
-          <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-2xl">
+          <p className="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl">
             {text.tagline}
           </p>
 
           {/* Navigation links */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-12">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-14">
             {links.map((link) => (
               <Link
                 key={link.href}
