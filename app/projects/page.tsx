@@ -32,17 +32,18 @@ const projects: Project[] = [
     },
   },
   {
-    tags: ["R", "Bayesian Statistics", "Quantile Regression", "Education", "Sensitivity Analysis"],
-    collaborators: "With Johnatan Cardona Jiménez PhD",
+    tags: ["R", "Bayesian Statistics", "Quantile Regression", "EM", "INLA", "Scalable Inference"],
+    collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
+    github: "https://github.com/torodriguezt/EM-INLA",
     title: {
-      en: "Sensitivity of Bayesian Quantile Regression — Prueba Saber 11",
-      es: "Sensibilidad de la Regresión Cuantílica Bayesiana — Prueba Saber 11",
-      pt: "Sensibilidade da Regressão Quantílica Bayesiana — Prueba Saber 11",
+      en: "Scalable Bayesian Quantile Regression via EM and INLA: The EM-INLA Algorithm",
+      es: "Regresión Cuantílica Bayesiana Escalable vía EM e INLA: El Algoritmo EM-INLA",
+      pt: "Regressão Quantílica Bayesiana Escalável via EM e INLA: O Algoritmo EM-INLA",
     },
     description: {
-      en: "Analysis of sensitivity in Bayesian quantile regression models under different prior specifications, with application to Colombia's Saber 11 standardized test for understanding educational performance across quantiles.",
-      es: "Análisis de sensibilidad en modelos de regresión cuantílica bayesiana bajo diferentes especificaciones de prioris, con aplicación a la Prueba Saber 11 de Colombia para entender el rendimiento educativo a través de cuantiles.",
-      pt: "Análise de sensibilidade em modelos de regressão quantílica bayesiana sob diferentes especificações de prioris, com aplicação à Prueba Saber 11 da Colômbia para entender o desempenho educacional através de quantis.",
+      en: "Scalable algorithm for Bayesian quantile regression combining EM with integrated nested Laplace approximations (INLA), reducing computational cost while preserving inferential accuracy.",
+      es: "Algoritmo escalable para regresión cuantílica bayesiana que combina EM con aproximaciones de Laplace anidadas e integradas (INLA), reduciendo el costo computacional sin sacrificar la precisión inferencial.",
+      pt: "Algoritmo escalável para regressão quantílica bayesiana que combina EM com aproximações de Laplace aninhadas e integradas (INLA), reduzindo o custo computacional sem sacrificar a precisão inferencial.",
     },
   },
   {
@@ -74,40 +75,12 @@ const projects: Project[] = [
       pt: "Modelo espacial bivariado para analisar conjuntamente violência sexual e não sexual, combinado com um modelo logístico multinomial para a violência mental da mulher em municípios colombianos.",
     },
   },
-  {
-    tags: ["R", "Gaussian Processes", "Spatial Statistics", "Environmental Science"],
-    github: "https://github.com/torodriguezt/GP-Valle-de-Aburra",
-    title: {
-      en: "Gaussian Process Modelling — Valle de Aburrá Microclimate",
-      es: "Modelado con Procesos Gaussianos — Microclima del Valle de Aburrá",
-      pt: "Modelagem com Processos Gaussianos — Microclima do Valle de Aburrá",
-    },
-    description: {
-      en: "Gaussian process model for microclimate prediction in the Valle de Aburrá metropolitan area, capturing spatial variability in environmental conditions.",
-      es: "Modelo de procesos gaussianos para predicción del microclima en el área metropolitana del Valle de Aburrá, capturando la variabilidad espacial en condiciones ambientales.",
-      pt: "Modelo de processos gaussianos para previsão do microclima na área metropolitana do Valle de Aburrá, capturando a variabilidade espacial em condições ambientais.",
-    },
-  },
-  {
-    tags: ["Python", "BERT", "NLP", "Multi-label", "Multi-class", "Deep Learning"],
-    github: "https://github.com/torodriguezt/Clasificacion_Biomedica",
-    title: {
-      en: "Multi-label Medical Article Classification",
-      es: "Clasificación Multi-etiqueta de Artículos Médicos",
-      pt: "Classificação Multi-rótulo de Artigos Médicos",
-    },
-    description: {
-      en: "BERT-based multi-label and multi-class classifier for medical articles using title and abstract. Articles can belong to one, two, three, or all four categories simultaneously, handling the combinatorial nature of medical literature.",
-      es: "Clasificador multi-etiqueta y multi-clase basado en BERT para artículos médicos usando título y resumen. Los artículos pueden pertenecer a una, dos, tres o las cuatro categorías simultáneamente.",
-      pt: "Classificador multi-rótulo e multi-classe baseado em BERT para artigos médicos usando título e resumo. Os artigos podem pertencer a uma, duas, três ou todas as quatro categorias simultaneamente.",
-    },
-  },
 ]
 
 const openSource: Project[] = [
   {
     tags: ["Python", "Conformal Prediction", "XAI", "Explainability", "Machine Learning"],
-    collaborators: "With Verónica Seguro Varela (MSc student in Statistical Sciences, Universidad Nacional de Colombia, Medellín), Rafael Izbicki PhD (Federal University of São Carlos), Johnatan Cardona Jiménez PhD (Universidad Nacional de Colombia, Medellín)",
+    collaborators: "With Verónica Seguro Varela MSc, Rafael Izbicki PhD, Johnatan Cardona Jiménez PhD",
     github: "https://github.com/torodriguezt/uxplain",
     title: {
       en: "uxplain",
@@ -152,6 +125,20 @@ const openSource: Project[] = [
 ]
 
 const sideProjects: Project[] = [
+  {
+    tags: ["Python", "BERT", "NLP", "Multi-label", "Multi-class", "Deep Learning"],
+    github: "https://github.com/torodriguezt/Clasificacion_Biomedica",
+    title: {
+      en: "Multi-label Medical Article Classification",
+      es: "Clasificación Multi-etiqueta de Artículos Médicos",
+      pt: "Classificação Multi-rótulo de Artigos Médicos",
+    },
+    description: {
+      en: "BERT-based multi-label and multi-class classifier for medical articles using title and abstract. Articles can belong to one, two, three, or all four categories simultaneously, handling the combinatorial nature of medical literature.",
+      es: "Clasificador multi-etiqueta y multi-clase basado en BERT para artículos médicos usando título y resumen. Los artículos pueden pertenecer a una, dos, tres o las cuatro categorías simultáneamente.",
+      pt: "Classificador multi-rótulo e multi-classe baseado em BERT para artigos médicos usando título e resumo. Os artigos podem pertencer a uma, duas, três ou todas as quatro categorias simultaneamente.",
+    },
+  },
   {
     tags: ["Python", "Computer Vision", "LSTM", "Embeddings", "Recommendation Systems"],
     github: [
