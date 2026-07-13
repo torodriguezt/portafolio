@@ -7,11 +7,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useLanguage, type Language } from "@/contexts/language-context"
 
 const navLinks = (language: Language) => [
-  { href: "/about", label: { en: "About", es: "Acerca", pt: "Sobre" }[language] },
   { href: "/experience", label: { en: "Experience", es: "Experiencia", pt: "Experiência" }[language] },
   { href: "/projects", label: { en: "Projects", es: "Proyectos", pt: "Projetos" }[language] },
   { href: "/research", label: { en: "Research", es: "Investigación", pt: "Pesquisa" }[language] },
-  { href: "/recognition", label: { en: "Recognition", es: "Reconocimientos", pt: "Reconhecimentos" }[language] },
+  { href: "/awards", label: { en: "Awards", es: "Premios", pt: "Prêmios" }[language] },
 ]
 
 const languages: Language[] = ["en", "es", "pt"]

@@ -32,7 +32,7 @@ const papers: Paper[] = [
   },
   {
     collaborators: "With Johnatan Cardona Jiménez PhD, Alejandra Estefanía Patiño Hoyos PhD, Simón Ruiz Martínez PhD",
-    status: "In preparation",
+    status: "Submitted to Social Sciences & Humanities Open",
     tags: ["Bayesian Statistics", "Multinomial", "Spatio-temporal", "Public Health", "Social Science"],
     title: {
       en: "Multinomial Model for Gender-Based Violence in Colombia: A Bayesian Approach to a Wicked Policy Problem",
@@ -46,18 +46,18 @@ const papers: Paper[] = [
     },
   },
   {
-    collaborators: "With Johnatan Cardona Jiménez PhD, Alejandra Estefanía Patiño Hoyos PhD, Simón Ruiz Martínez PhD",
-    status: "In preparation",
-    tags: ["Bayesian Statistics", "Bivariate Models", "Spatial Analysis", "Multinomial Logistic", "Public Health"],
+    collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
+    status: "Available on arXiv",
+    tags: ["Bayesian Statistics", "Quantile Regression", "EM", "INLA", "Scalable Inference"],
     title: {
-      en: "Bivariate Spatial Analysis of Sexual and Non-Sexual Violence Against Women in Colombia",
-      es: "Análisis Espacial Bivariado de Violencia Sexual y No Sexual Contra la Mujer en Colombia",
-      pt: "Análise Espacial Bivariada de Violência Sexual e Não Sexual Contra a Mulher na Colômbia",
+      en: "Scalable Bayesian Quantile Regression via EM and INLA: The EM-INLA Algorithm",
+      es: "Regresión Cuantílica Bayesiana Escalable vía EM e INLA: El Algoritmo EM-INLA",
+      pt: "Regressão Quantílica Bayesiana Escalável via EM e INLA: O Algoritmo EM-INLA",
     },
     description: {
-      en: "Bivariate spatial model for jointly analyzing sexual and non-sexual violence, combined with a multinomial logistic model for women's mental violence, capturing spatial correlation across Colombian municipalities.",
-      es: "Modelo espacial bivariado para analizar conjuntamente violencia sexual y no sexual, combinado con un modelo logístico multinomial para la violencia mental de la mujer, capturando correlación espacial en municipios colombianos.",
-      pt: "Modelo espacial bivariado para analisar conjuntamente violência sexual e não sexual, combinado com um modelo logístico multinomial para a violência mental da mulher, capturando correlação espacial em municípios colombianos.",
+      en: "Scalable algorithm for Bayesian quantile regression combining EM with integrated nested Laplace approximations (INLA), reducing computational cost while preserving inferential accuracy.",
+      es: "Algoritmo escalable para regresión cuantílica bayesiana que combina EM con aproximaciones de Laplace anidadas e integradas (INLA), reduciendo el costo computacional sin sacrificar la precisión inferencial.",
+      pt: "Algoritmo escalável para regressão quantílica bayesiana que combina EM com aproximações de Laplace aninhadas e integradas (INLA), reduzindo o custo computacional sem sacrificar a precisão inferencial.",
     },
   },
   {
@@ -78,6 +78,25 @@ const papers: Paper[] = [
 ]
 
 const conferencesByYear = [
+  {
+    year: 2026,
+    conferences: [
+      {
+        name: "GEOMED 2026",
+        location: "Pamplona, Spain",
+        presentations: [
+          {
+            topic: "Bivariate spatial analysis of sexual and non-sexual violence against women in Colombia",
+            type: "Poster",
+          },
+          {
+            topic: "Spatial Bayesian Modelling and Assessment of Posterior Approximation Algorithms",
+            type: "Poster",
+          },
+        ],
+      },
+    ],
+  },
   {
     year: 2025,
     conferences: [

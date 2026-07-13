@@ -98,9 +98,9 @@ const experiences: Experience[] = [
     company: "Universidad Nacional de Colombia",
     period: "Sep 2023 – Present",
     title: {
-      en: "Research Assistant — Data Science",
-      es: "Asistente de Investigación — Ciencia de Datos",
-      pt: "Assistente de Pesquisa — Ciência de Dados",
+      en: "Research Assistant — Statistics Department",
+      es: "Asistente de Investigación — Departamento de Estadística",
+      pt: "Assistente de Pesquisa — Departamento de Estatística",
     },
     points: {
       en: [

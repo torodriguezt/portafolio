@@ -106,6 +106,21 @@ const projects: Project[] = [
 
 const openSource: Project[] = [
   {
+    tags: ["Python", "Conformal Prediction", "XAI", "Explainability", "Machine Learning"],
+    collaborators: "With Verónica Seguro Varela (MSc student in Statistical Sciences, Universidad Nacional de Colombia, Medellín), Rafael Izbicki PhD (Federal University of São Carlos), Johnatan Cardona Jiménez PhD (Universidad Nacional de Colombia, Medellín)",
+    github: "https://github.com/torodriguezt/uxplain",
+    title: {
+      en: "uxplain",
+      es: "uxplain",
+      pt: "uxplain",
+    },
+    description: {
+      en: "Python library that combines conformal prediction with explainability methods (XAI).",
+      es: "Librería de Python que combina predicción conforme con métodos de explicabilidad (XAI).",
+      pt: "Biblioteca Python que combina predição conforme com métodos de explicabilidade (XAI).",
+    },
+  },
+  {
     tags: ["R", "C++", "Bayesian", "Quantile Regression", "Survey Statistics", "MCMC"],
     collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
     link: "https://cran.r-project.org/web/packages/bayesQRsurvey/index.html",

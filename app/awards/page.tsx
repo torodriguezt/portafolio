@@ -41,12 +41,12 @@ const awards: Award[] = [
 ]
 
 const ui = {
-  en: { home: "Home", title: "Recognition" },
-  es: { home: "Inicio", title: "Reconocimientos" },
-  pt: { home: "Início", title: "Reconhecimentos" },
+  en: { home: "Home", title: "Awards" },
+  es: { home: "Inicio", title: "Premios" },
+  pt: { home: "Início", title: "Prêmios" },
 }
 
-export default function RecognitionPage() {
+export default function AwardsPage() {
   const { language } = useLanguage()
   const t = ui[language]
 
