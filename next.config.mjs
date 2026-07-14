@@ -1,4 +1,5 @@
-const basePath = process.env.NODE_ENV === 'production' ? '/portafolio' : ''
+// Served from the root user site (torodriguezt.github.io), so no basePath.
+const basePath = ''
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
