@@ -9,6 +9,7 @@ import { useLanguage, type Language } from "@/contexts/language-context"
 interface Paper {
   collaborators: string
   status: string
+  link?: string
   tags: string[]
   title: Record<Language, string>
   description: Record<Language, string>
@@ -48,6 +49,7 @@ const papers: Paper[] = [
   {
     collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
     status: "Available on arXiv",
+    link: "https://arxiv.org/abs/2607.10432",
     tags: ["Bayesian Statistics", "Quantile Regression", "EM", "INLA", "Scalable Inference"],
     title: {
       en: "Scalable Bayesian Quantile Regression via EM and INLA: The EM-INLA Algorithm",
@@ -221,7 +223,18 @@ export default function ResearchPage() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-2">
                   <h3 className="text-lg font-medium text-gray-900">{paper.title[language]}</h3>
-                  <span className="text-xs text-gray-500 font-mono italic">{paper.status}</span>
+                  {paper.link ? (
+                    <a
+                      href={paper.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-gray-500 hover:text-gray-900 font-mono italic underline underline-offset-2 transition-colors"
+                    >
+                      {paper.status}
+                    </a>
+                  ) : (
+                    <span className="text-xs text-gray-500 font-mono italic">{paper.status}</span>
+                  )}
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed mb-2 max-w-2xl">
                   {paper.description[language]}
