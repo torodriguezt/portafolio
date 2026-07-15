@@ -47,7 +47,7 @@ const papers: Paper[] = [
     },
   },
   {
-    collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
+    collaborators: "With Johnatan Cardona Jiménez PhD",
     status: "Available on arXiv",
     link: "https://arxiv.org/abs/2607.10432",
     tags: ["Bayesian Statistics", "Quantile Regression", "EM", "INLA", "Scalable Inference"],

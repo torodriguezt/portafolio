@@ -33,7 +33,7 @@ const projects: Project[] = [
   },
   {
     tags: ["R", "Bayesian Statistics", "Quantile Regression", "EM", "INLA", "Scalable Inference"],
-    collaborators: "With Johnatan Cardona Jiménez PhD, Kelly Christina Mota Gonçalves PhD, Marcus Lavagnole Nascimiento PhD",
+    collaborators: "With Johnatan Cardona Jiménez PhD",
     github: "https://github.com/torodriguezt/EM-INLA",
     title: {
       en: "Scalable Bayesian Quantile Regression via EM and INLA: The EM-INLA Algorithm",
